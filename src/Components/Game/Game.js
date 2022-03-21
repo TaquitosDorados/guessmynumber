@@ -7,7 +7,8 @@ class Game extends Component {
         this.state = {
             number: "",
             message: "",
-            random: generateRandomNumber(100)
+            random: generateRandomNumber(100),
+            clase:  ""
         }
     }
 
@@ -26,10 +27,12 @@ handleOnClick = ()=>{
     const number = parseInt(this.state.number);
     const random = parseInt(this.state.random);
     const text = calculateText(number,random);
+    const clasess = darClase(number,random);
 
 console.log(random);
 
     this.setState({message: text});
+    this.setState({clase: clasess});
 }
 
     render() {
@@ -37,7 +40,7 @@ console.log(random);
             <div className="game">
                 <input type="number" value={this.state.number} onChange={this.handleOnChange}></input>
                 <button onClick={this.handleOnClick}>Probar</button>
-                <p>{this.state.message}</p>
+                <p className={this.state.clase}>{this.state.message}</p>
             </div>
         );
     }
@@ -51,10 +54,60 @@ function generateRandomNumber(max, min=1){
 
 function calculateText(number,random){
     if(number===random){
-        return "Haz acertado!";
-    } else if(number<random){
-        return "Muy pequeño";
-    } else {
-        return "Muy grande";
-    }
+        return "Haz acertado!"; 
+      }
+      else if(random-number < -25){
+        return 'Lejos (Mayor)';
+      } else if(random-number<-10){
+
+        return 'Cerca (Mayor)';
+      } else if(random-number<-5){
+
+        return 'Muy Cerca (Mayor)';
+      } else if(random-number< 0){
+
+        return 'Extremadamente Cerca (Mayor)';
+      } else if(random-number<5){
+
+        return 'Extremadamente Cerca (Menor)';
+      } else if(random-number<10){
+
+        return 'Muy Cerca (Menor)';
+      } else if(random-number<25){
+
+        return 'Cerca (Menor)';
+      } else {
+
+        return 'Lejos (Menor)';
+      }
+}
+
+function darClase(number,random){
+    if(number===random){
+        return "correcto"; 
+      }
+      else if(random-number < -25){
+        return 'incorrecto';
+      } else if(random-number<-10){
+
+        return 'cerca';
+      } else if(random-number<-5){
+
+        return 'cerca';
+      } else if(random-number< 0){
+
+        return 'cerca';
+      } else if(random-number<5){
+
+        return 'cerca';
+      } else if(random-number<10){
+
+        return 'cerca';
+      } else if(random-number<25){
+
+        return 'cerca';
+      } else {
+
+        return 'incorrecto';
+      }
 }

@@ -4,3 +4,15 @@
     align-items: center;
     margin:16px;
 }
+
+.correcto{
+    color: green;
+  }
+  
+.incorrecto{
+    color: red;
+  }
+  
+.cerca{
+    color:rgb(255, 187, 0);
+  }
