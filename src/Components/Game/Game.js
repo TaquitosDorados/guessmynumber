@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./Game.css";
+import List from "../List";
 
 class Game extends Component {
     constructor() {
@@ -8,7 +9,8 @@ class Game extends Component {
             number: "",
             message: "",
             random: generateRandomNumber(100),
-            clase:  ""
+            clase:  "",
+            intentos: [],
         }
     }
 
@@ -29,10 +31,19 @@ handleOnClick = ()=>{
     const text = calculateText(number,random);
     const clasess = darClase(number,random);
 
-console.log(random);
+    console.log(random);
 
     this.setState({message: text});
     this.setState({clase: clasess});
+    this.setState({intentos: 
+    [
+      ...this.state.intentos,
+      {
+        number: number,
+      }
+    ]})
+
+    console.log(this.state.intentos);
 }
 
     render() {
@@ -41,6 +52,7 @@ console.log(random);
                 <input type="number" value={this.state.number} onChange={this.handleOnChange}></input>
                 <button onClick={this.handleOnClick}>Probar</button>
                 <p className={this.state.clase}>{this.state.message}</p>
+                <List tries = {this.state.intentos}/>
             </div>
         );
     }
